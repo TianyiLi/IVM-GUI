@@ -9,11 +9,11 @@ let stomp;
 export const ebus = {
     async connect() {
         let self = this
-        stomp = webstomp.client(`ws://${config._ebus_ip}:61614/stomp`, { debug: config.debug })
+        stomp = webstomp.client(`ws://${config.params._ebus_ip}:61614/stomp`, { debug: config.params.debug })
         stomp.connect('user', 'password', () => {
             _ebus.$emit('ready')
             console.log('connected')
-            config._tran_chan.forEach(ele => {
+            config.params._tran_chan.forEach(ele => {
                 stomp.subscribe(ele, msg => {
                     if (msg.body === '') return
                     let _arg = JSON.parse(msg.body)
@@ -36,7 +36,7 @@ export const ebus = {
     },
     send(data) {
         data = typeof data === 'object' ? JSON.stringify(data) : data
-        config._trig_chan.forEach(ele=>{
+        config.params._trig_chan.forEach(ele=>{
             stomp.send(ele, data)
         })
     }
