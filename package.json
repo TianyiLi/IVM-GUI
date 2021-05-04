@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "vue": "^2.5.17",
     "webstomp-client": "^1.2.0"
   },
